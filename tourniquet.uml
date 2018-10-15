@@ -1,0 +1,37 @@
+@startuml
+
+participant "Incubateur DINSIC" as dinsic
+participant "Octo" as octo
+participant "Arolla" as arolla
+participant "la Zone" as lazone
+
+== fluide  ==
+
+dinsic -> octo : Expression de Besoin EB1
+octo -> dinsic : oui EB1
+dinsic -> arolla : Expression de Besoin EB2
+arolla -> dinsic : non EB2
+dinsic -> lazone : Expression de Besoin EB2
+lazone -> dinsic : oui EB2
+dinsic -> octo : Expression de Besoin EB3
+
+== bloqué  ==
+
+dinsic -> octo : Expression de Besoin EB1
+octo -> dinsic : oui EB1
+dinsic -> arolla : Expression de Besoin EB2
+dinsic -> arolla : Expression de Besoin EB3
+arolla -> dinsic : non EB2
+dinsic -> lazone : Expression de Besoin EB2
+dinsic -> lazone : Expression de Besoin EB2
+note over dinsic
+  À qui envoit-on l'EB3 ?
+end note
+
+== forçage  ==
+
+dinsic -> arolla : émission de Bon de Commande sans devis
+... 6 jours sans réponse ...
+dinsic -> dinsic : attribution d'office
+
+@enduml

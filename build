@@ -1,0 +1,20 @@
+#!/bin/bash -x
+
+JAR=plantuml.jar
+TARGET_EXT=png
+SOURCE_EXT=uml
+
+if [[ ! -f "${JAR}" ]] ; then
+  echo "Could'nt find file $JAR" >&2
+  echo "Download it at https://sourceforge.net/projects/plantuml/files/latest/download" >&2
+  exit -1
+fi
+
+for source in $(ls *.$SOURCE_EXT) ; do
+  base=$(basename $source ".${SOURCE_EXT}")
+  target=images/${base}.${TARGET_EXT}
+  cat $source | java -Djava.awt.headless=true -jar $JAR -t${TARGET_EXT} -pipe  > $target
+  echo "${target} built"
+done
+
+
