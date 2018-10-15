@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 
 JAR=plantuml.jar
 TARGET_EXT=png
