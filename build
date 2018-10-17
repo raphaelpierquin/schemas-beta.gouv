@@ -13,8 +13,11 @@ fi
 for source in $(ls *.$SOURCE_EXT) ; do
   base=$(basename $source ".${SOURCE_EXT}")
   target=images/${base}.${TARGET_EXT}
-  cat $source | java -Djava.awt.headless=true -jar $JAR -t${TARGET_EXT} -pipe  > $target
-  echo "${target} built"
+  if [[ $source -nt $target ]] ; then
+    cat $source | java -Djava.awt.headless=true -jar $JAR -t${TARGET_EXT} -pipe  > $target
+    echo "${target} built"
+  fi
+
 done
 
 
