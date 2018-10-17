@@ -1,11 +1,14 @@
 @startuml
 
-participant "Administration tierce" as admin
-participant "Incubateur DINSIC" as dinsic
+participant "Administration tierce" as tiers
+participant "Administration DINSIC" as dinsic
+participant "Incubateur" as incubateur
 participant "Prestataire" as prestataire
 participant "Indépendant\nsous traitant" as indep
 
-admin -> dinsic : convention de refacturation
+tiers -> dinsic : convention de refacturation
+prestataire -> incubateur : devis
+incubateur -> dinsic : devis signé
 dinsic -> prestataire : bon de commande (n°BC)
 activate indep
 indep -> indep : prestation mois 1
@@ -17,15 +20,16 @@ indep -> indep : prestation mois 3
 indep -> prestataire : facture3
 deactivate indep
 prestataire -> indep : paiement facture 2
-prestataire -> dinsic : PV
-dinsic -> prestataire : service fait
 prestataire -> indep : paiement facture 3
+prestataire -> incubateur : service fait
+incubateur -> dinsic : PV service fait
+incubateur -> prestataire : PV de service fait
 prestataire -> dinsic : facture A sur Chorus Pro (n°BC)
 ...30 jours plus tard...
 dinsic -> prestataire : règlement facture A
-dinsic -> admin : état liquidatif
-admin -> dinsic : "OK"
-dinsic -> admin : titre de perception
-admin -> dinsic : argent refacturé \o/
+dinsic -> tiers : état liquidatif
+tiers -> dinsic : "OK"
+dinsic -> tiers : titre de perception
+tiers -> dinsic : argent refacturé \o/
 
 @enduml
