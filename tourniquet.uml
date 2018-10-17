@@ -23,7 +23,6 @@ dinsic -> arolla : Expression de Besoin EB2
 dinsic -> arolla : Expression de Besoin EB3
 arolla -> dinsic : non EB2
 dinsic -> lazone : Expression de Besoin EB2
-dinsic -> lazone : Expression de Besoin EB2
 note over dinsic
   À qui envoit-on l'EB3 ?
 end note
